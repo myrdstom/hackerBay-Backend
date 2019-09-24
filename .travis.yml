@@ -9,6 +9,7 @@ install:
 env:
   global:
     - NODE_ENV=test
+    - JWT_SECRET=secret_key
 
 before_script:
   - yarn run build
