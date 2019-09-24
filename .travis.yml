@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "11"
+cache:
+  directories:
+    - "node_modules"
+install:
+  - yarn install
+env:
+  global:
+    - NODE_ENV=test
+
+before_script:
+  - yarn run build
+script:
+  - yarn test
+after_success:
+  - yarn run coverage

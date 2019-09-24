@@ -33,7 +33,7 @@ app.use((req, res, next) =>{
 })
 
 // configure port and listen for requests
-const port = parseInt(process.env.NODE_ENV === 'test' ? 8378 : process.env.PORT, 10) || 8000
+const port = parseInt(process.env.NODE_ENV === 'test' ? 8378 : process.env.PORT, 10) || 8000;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
