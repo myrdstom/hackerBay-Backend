@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch src --exec babel-node ./src/index.js",
-    "test": "NODE_ENV=test nyc mocha --recursive --require @babel/register ./src/__tests__/ --exit"
+    "start": "NODE_ENV=production nodemon --watch src --exec babel-node ./src/index.js",
+    "test": "NODE_ENV=test nyc mocha --recursive --require @babel/register ./src/__tests__/ --timeout 20000 --detectOpenHandles --exit",
+    "build": "rm -rf ./build && babel -d ./build ./src -s",
+    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
+    "coveralls-coverage": "coveralls < lcov.info",
+    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage"
   },
   "author": "Paul Kayongo",
   "license": "ISC",
