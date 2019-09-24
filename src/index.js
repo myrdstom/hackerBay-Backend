@@ -1,8 +1,11 @@
 import '@babel/polyfill';
+import config from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import router from './routes';
+
+config.config();
 
 const app = express();
 const corsOptions = {
@@ -30,7 +33,7 @@ app.use((req, res, next) =>{
 })
 
 // configure port and listen for requests
-const port = process.env.PORT;
+const port = parseInt(process.env.NODE_ENV === 'test' ? 8378 : process.env.PORT, 10) || 8000
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
