@@ -5,7 +5,6 @@ import { validUser } from "../__mocks__/testData";
 
 const { expect } = chai;
 
-const { username, password } = validUser;
 
 describe("POST/ login user", function() {
   it("returns status code 400 if user doesnot provide required credentials", async () => {
@@ -16,7 +15,7 @@ describe("POST/ login user", function() {
     it('returns status code 200 if a user logs in successfully', async () => {
         AppTest.post('/login').send(validUser).then(response =>{
             expect(response.status).to.equal(200);
-            expect(response.body.message).to.equal('success');
+            expect(response.body.username).to.equal('testUser');
 
         })
 
