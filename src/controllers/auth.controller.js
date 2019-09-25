@@ -2,8 +2,9 @@ import jwt from "jsonwebtoken";
 import { validationResult } from "express-validator/check";
 import Validations from "../util/validation";
 
+
 class AuthenticationController {
-  static async login(req, res, next) {
+  static async login(req, res) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return Validations.displayError(req, res, errors);
@@ -19,12 +20,13 @@ class AuthenticationController {
       process.env.JWT_SECRET,
       { expiresIn: "24h" }
     );
-    res.header("Bearer", token);
+    res.header("Authorization", token);
+
 
     return res.status(200).json({
-      accessToken: `Bearer ${token}`,
+      username: username,
+      accessToken: `${token}`,
       expires_in: "24h",
-      message: "success"
     });
   }
 }

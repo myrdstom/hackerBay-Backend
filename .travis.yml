@@ -5,15 +5,15 @@ cache:
   directories:
     - "node_modules"
 install:
-  - yarn install
+  - npm install
 env:
   global:
     - NODE_ENV=test
     - JWT_SECRET=secret_key
 
 before_script:
-  - yarn run build
+  - npm run build
 script:
-  - yarn test
+  - npm test
 after_success:
   - coveralls < coverage/lcov.info

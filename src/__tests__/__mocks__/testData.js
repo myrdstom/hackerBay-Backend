@@ -1,6 +1,10 @@
-const validUser = {
+export const validUser = {
     username: 'testUser',
     password: 'P@ssw0rd'
 }
 
-export {validUser}
+export const invalidUrl = {
+    url:  'testData'
+}
+
+
