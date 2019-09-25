@@ -8,9 +8,7 @@
     "start": "NODE_ENV=production nodemon --watch src --exec babel-node ./src/index.js",
     "test": "NODE_ENV=test nyc mocha --recursive --require @babel/register ./src/__tests__/ --timeout 20000 --detectOpenHandles --exit",
     "build": "rm -rf ./build && babel -d ./build ./src -s",
-    "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",
-    "coveralls-coverage": "coveralls < lcov.info",
-    "coverage": "nyc npm test && npm run generate-lcov && npm run coveralls-coverage"
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "author": "Paul Kayongo",
   "license": "ISC",
@@ -26,7 +24,6 @@
     "express-validator": "^5.3.1",
     "fast-json-patch": "^3.0.0-1",
     "image-downloader": "^3.5.0",
-    "istanbul": "^0.4.5",
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^1.18.11",
     "sharp": "^0.23.0"
