@@ -16,8 +16,4 @@ before_script:
 script:
   - yarn test
 after_success:
-<<<<<<< HEAD
   - npm run coveralls
-=======
-  - coveralls < coverage/lcov.info
->>>>>>> Adding coveralls
