@@ -3,8 +3,4 @@ export const validUser = {
     password: 'P@ssw0rd'
 }
 
-export const invalidUrl = {
-    url:  'testData'
-}
-
 

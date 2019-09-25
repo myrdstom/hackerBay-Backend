@@ -19,7 +19,6 @@ export default class verifyToken {
         } catch (e) {
             res.status(400).json({
                 error: {
-                    status: 400,
                     message: 'Invalid token',
                 },
             });

@@ -12,7 +12,7 @@ describe("POST/ login user", function() {
     expect(response.body.errors[0].message).to.equal('Username must be at least 2 chars long and utmost 32');
     expect(response.status).to.equal(400);
   });
-    it('returns status code 200 if a user logs in successfully', async () => {
+    it('returns status code 200 if a user logs in successfully',  () => {
         AppTest.post('/login').send(validUser).then(response =>{
             expect(response.status).to.equal(200);
             expect(response.body.username).to.equal('testUser');
