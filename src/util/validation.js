@@ -1,4 +1,4 @@
-const { body } = require('express-validator/check');
+const { body, checkSchema } = require('express-validator/check');
 
 export default class Validations {
     static validity = method => {
@@ -26,6 +26,12 @@ export default class Validations {
                         .withMessage('Please provide a valid url')
                         .matches(/\.(jpg|jpeg|png)$/i)
                         .withMessage('Please provide a link to an image'),
+                ];
+            }
+            case 'jsonPatch': {
+                return [
+                    body('document', 'The document field is missing').exists(),
+                    body('patches', 'The patches field is missing').exists()
                 ];
             }
         }
