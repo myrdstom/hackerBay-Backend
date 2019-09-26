@@ -1,4 +1,4 @@
-const { body, checkSchema } = require('express-validator/check');
+const { body } = require('express-validator/check');
 
 export default class Validations {
     static validity = method => {

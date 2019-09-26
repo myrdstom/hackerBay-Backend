@@ -1,10 +1,17 @@
 import download from 'image-downloader';
 import path from 'path';
+import { validationResult } from 'express-validator/check';
 import { resizeImage } from '../util/helpers';
-import { validationResult } from "express-validator/check";
-import Validations from "../util/validation";
+import Validations from '../util/validation';
 
 class ThumbnailController {
+    /**
+     * @desc Downloads an image and resizes it to a thumbnail as specified
+     *
+     * @param {object} req Get request object from client
+     * @param {object} res REST Response object
+     * @returns {object} Response containing a message confirming the image has been doenloaded and resized
+     */
     static async createThumbnail(req, res) {
         const errors = validationResult(req);
         const { url } = req.body;
