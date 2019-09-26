@@ -23,7 +23,7 @@ describe('Tests for creating a thumbnail', () => {
         const res = await BaseTest.post('/login').send(validUser);
         access_token = res.body.accessToken;
     });
-    it('Should return an error when a user tries to log in without authorization', async () => {
+    it('Should return an error when a user tries to create a thumbnail without authorization', async () => {
         const response = await BaseTest.post('/thumbnail').send(invalidUrl);
         expect(response.status).to.equal(401);
         expect(response.body.error.message).to.equal('Access Unauthorized');
