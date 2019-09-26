@@ -1,6 +1,11 @@
 const { body } = require('express-validator/check');
 
 export default class Validations {
+    /**
+     * @description Handles validation for the various endpoints
+     /*
+     * @returns Returns validation errors as per the user requests
+     */
     static validity = method => {
         switch (method) {
             case 'login': {

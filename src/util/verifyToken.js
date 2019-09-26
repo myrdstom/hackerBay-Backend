@@ -1,6 +1,11 @@
 import jwt from 'jsonwebtoken';
 
 export default class verifyToken {
+    /**
+     * @description Check whether the user is authorized, decode a token and check whether it is valid
+     /*
+     * @returns Returns the 'unAuthorized message' or 'Invalid token' message depending on the credentials a user has used
+     */
     static authenticate = (req, res, next) => {
         const token = req.header('Authorization');
         if (!token) {

@@ -29,6 +29,7 @@ class AuthenticationController {
         res.header('Authorization', token);
 
         return res.status(200).json({
+            status: 200,
             username,
             accessToken: `${token}`,
             expires_in: '24h',
