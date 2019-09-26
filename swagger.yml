@@ -1,0 +1,94 @@
+
+swagger: '2.0'
+info:
+  title: Hacker Bay API
+  description: An API for the hackerbay interview challenge
+  version: 1.0.0
+schemes:
+  - http
+  - https
+host: 0.0.0.0:8000
+basePath: /api/v1
+consumes:
+  - application/json
+  - multipart/form-data
+produces:
+  - application/json
+securityDefinitions:
+  bearerToken:
+    type: apiKey
+    in: header
+    name: Authorization
+security:
+  - bearerToken: []
+
+paths:
+  /auth/login:
+    post:
+      responses:
+        '200':
+          description: 200 OK
+          schema:
+            $ref: '#/definitions/LoginResponse'
+      tags:
+        - Login
+      description: Login a user and return a username, token and token expiry
+  /image/thumbnail:
+    post:
+      responses:
+        '201':
+          description: 201 OK
+          schema:
+            $ref: '#/definitions/Thumbnail'
+      tags:
+        - Thumbnail
+      description: Download an image and resize it to create a thumbnail
+      summary: Download and thumbnail an image
+  /jsonPatch:
+    post:
+      responses:
+        '201':
+          description: 201 OK
+          schema:
+            $ref: '#/definitions/JsonPatching'
+      tags:
+        - JsonPatching
+      summary: Perform json patching
+definitions:
+  LoginResponse:
+    properties:
+      username:
+        type: string
+        example: myrdstom
+      token:
+        type: string
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNjNmRkMDEzZTAyMWExMTY3Yjk0ZmQ2NyIsInVzZXJuYW1lIjoiZXhhbXBsZUBVc2VyIiwiZW1haWwiOiJ4eHh4eHh4eEBleGFtcGxlLmNvbSIsImdyb3VwcyI6WyI1YzZkZDUxN2UwMjFhMDA2N2I5NGZkNjYiXSwiaWF0IjoxNTUwOTY2MzM3fQ.DJPUChNQpGkke_EOY82bB_aDeHwlGKaQkSHUAXGDXKs
+      expires_in:
+        type: string
+        example: "24h"
+    required:
+      - status
+      - message
+  Thumbnail:
+    properties:
+      message:
+        type: string
+        message: Image downloaded and re-sized
+  Json-patch:
+    properties:
+      success:
+        type: boolean
+        example: success
+      data:
+        type: object
+        properties:
+          imagePath:
+            type: string
+            example: usr/bin/img/thumbnail.jpg
+          message:
+            type: string
+            example: image resized successfully!
+tags:
+  - name: Login
+  - name: Thumbnail
+  - name: JsonPatching

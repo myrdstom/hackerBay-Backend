@@ -7,6 +7,6 @@ export const resizeImage = (paths, newPath, res) => {
         .then(() => {
             return res
                 .status(201)
-                .json({ status: 201, message: 'Image downloaded and re-sized' });
+                .json({ message: 'Image downloaded and re-sized' });
         })
 };
