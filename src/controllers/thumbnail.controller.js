@@ -10,7 +10,7 @@ class ThumbnailController {
      *
      * @param {object} req Get request object from client
      * @param {object} res REST Response object
-     * @returns {object} Response containing a message confirming the image has been doenloaded and resized
+     * @returns {object} Response containing a message confirming the image has been downloaded and re-sized
      */
     static async createThumbnail(req, res) {
         const errors = validationResult(req);
@@ -18,13 +18,15 @@ class ThumbnailController {
         if (!errors.isEmpty()) {
             return Validations.displayError(req, res, errors);
         }
+        const image = url.split('.').pop();
+
         const downloadedImage = path.join(
             __dirname,
-            `../assets/images/downloaded/Img.jpg`
+            `../assets/images/downloaded/Img.${image}`
         );
         const thumbnail = path.join(
             __dirname,
-            `../assets/images/re-sized/newImg.jpg`
+            `../assets/images/re-sized/newImg.${image}`
         );
         await download
             .image({
