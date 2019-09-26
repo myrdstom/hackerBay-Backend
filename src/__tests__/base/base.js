@@ -3,7 +3,7 @@ import supertest from "supertest";
 import app from "../../index";
 const version = "/api/v1";
 
-export class AppTest {
+export class BaseTest {
   static app = supertest(app);
 
   static post = url => {

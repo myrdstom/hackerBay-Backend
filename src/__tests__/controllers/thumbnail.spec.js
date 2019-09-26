@@ -1,6 +1,6 @@
 import chai from 'chai';
 
-import { AppTest } from '../base/base';
+import { BaseTest } from '../base/base';
 import { validUser } from '../__mocks__/testData';
 
 const { expect } = chai;
@@ -20,22 +20,22 @@ const invalidToken =
 
 describe('Tests for creating a thumbnail', () => {
     beforeEach(async () => {
-        const res = await AppTest.post('/login').send(validUser);
+        const res = await BaseTest.post('/login').send(validUser);
         access_token = res.body.accessToken;
     });
     it('Should return an error when a user tries to log in without authorization', async () => {
-        const response = await AppTest.post('/thumbnail').send(invalidUrl);
+        const response = await BaseTest.post('/thumbnail').send(invalidUrl);
         expect(response.status).to.equal(401);
         expect(response.body.error.message).to.equal('Access Unauthorized');
     });
     it('Should return an error when a user tries to download an invalid image', async () => {
-        const response = await AppTest.post('/thumbnail')
+        const response = await BaseTest.post('/thumbnail')
             .set('Authorization', `${access_token}`)
             .send(invalidUrl);
         expect(response.status).to.equal(400);
     });
     it('Should return an error if the user does not input anything', async () => {
-        const response = await AppTest.post('/thumbnail').set(
+        const response = await BaseTest.post('/thumbnail').set(
             'Authorization',
             `${access_token}`
         );
@@ -45,7 +45,7 @@ describe('Tests for creating a thumbnail', () => {
         );
     });
     it('Should successfully download an Image', () => {
-        const res =  AppTest.post('/thumbnail')
+        const res =  BaseTest.post('/thumbnail')
             .set('Authorization', `${access_token}`)
             .send(validUrl)
             .then(response => {
@@ -56,7 +56,7 @@ describe('Tests for creating a thumbnail', () => {
 
 describe('Testing for an invalid token', () => {
     it('Should return an error when a user provides an invalid token', async () => {
-        const response = await AppTest.post('/thumbnail')
+        const response = await BaseTest.post('/thumbnail')
             .set('Authorization', `${invalidToken}`)
             .send(invalidUrl);
         expect(response.status).to.equal(400);

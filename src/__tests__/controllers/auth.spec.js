@@ -1,6 +1,6 @@
 import chai from "chai";
 
-import { AppTest } from "../base/base";
+import { BaseTest } from "../base/base";
 import { validUser } from "../__mocks__/testData";
 
 const { expect } = chai;
@@ -8,12 +8,12 @@ const { expect } = chai;
 
 describe("POST/ login user", function() {
   it("returns status code 400 if user doesnot provide required credentials", async () => {
-    const response = await AppTest.post("/login").send({});
+    const response = await BaseTest.post("/login").send({});
     expect(response.body.errors[0].message).to.equal('Username must be at least 2 chars long and utmost 32');
     expect(response.status).to.equal(400);
   });
     it('returns status code 200 if a user logs in successfully',  () => {
-        AppTest.post('/login').send(validUser).then(response =>{
+        BaseTest.post('/login').send(validUser).then(response =>{
             expect(response.status).to.equal(200);
             expect(response.body.username).to.equal('testUser');
 
@@ -21,7 +21,7 @@ describe("POST/ login user", function() {
 
     });
   it("returns status code 400 if a user provides an invalid password", async () => {
-    const response = await AppTest.post('/login').send({
+    const response = await BaseTest.post('/login').send({
         username: 'myrd',
         password: 'rasengan',
     });
